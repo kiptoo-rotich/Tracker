@@ -2,7 +2,7 @@
 <div class="container">
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="logs" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -12,7 +12,7 @@
           </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/">
+                    <form method="POST">
                         {{ form.csrf_token }}
                         <p>
                             {{ wtf.quick_form(form) }}
@@ -23,42 +23,44 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
-            <h1 class="text-center">Home</h1>
+        <div class="col-md-2">
         </div>
-        <div class="col-6">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-               Add log
-              </button>
+        <div class="col-md-8" style="margin: 0px auto;">
+            {%if logs%}
             <table class="table">
-                {%if logs %}
                 <thead>
                     <tr>
-                        <th scope="col">Log</th>
-                        <th scope="col">Comment</th>
-                        <th scope="col">Updated on</th>
-                        <th scope="col">Rate</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col" class="text-center">Id</th>
+                        <th scope="col" class="text-center">Log</th>
+                        <th scope="col" class="text-center">Comment</th>
+                        <th scope="col" class="text-center">Updated on</th>
+                        <th scope="col" class="text-center">Rate</th>
+                        <th scope="col" class="text-center">Edit</th>
+                        <th scope="col" class="text-center">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {%for item in logs%}
                     <tr>
-                        <td>{{logs.name}}</td>
-                        <td><img src="https://img.icons8.com/fluency/28/000000/file.png" /></td>
-                        <td>{{logs.comment}}</td>
-                        <td>{{logs.posted}}</td>
-                        <td>{{logs.rate}}</td>
-                        <td><img src="https://img.icons8.com/ultraviolet/20/000000/edit.png" /></td>
-                        <td><img src="https://img.icons8.com/color/28/000000/delete-forever.png" /></td>
+                        <th scope="col" class="text-center">{{item.id}}</th>
+                        <td class="text-center">{{item.name}}</td>
+                        <td class="text-center">{{item.comment}}</td>
+                        <td class="text-center">{{item.posted}}</td>
+                        <td class="text-center">{{item.rate}}</td>
+                        <td class="text-center"><img src="https://img.icons8.com/ultraviolet/20/000000/edit.png" /></td>
+                        <td class="text-center"><img src="https://img.icons8.com/color/28/000000/delete-forever.png" /></td>
                     </tr>
+                    {%endfor%}
                 </tbody>
             </table>
-            {%else%}
+            {% else %}
             <h3 class="bg-danger text-center">No logs yet</h3>
-            {%endif%}
+            {% endif %}
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#logs">
+                Add log
+               </button>
         </div>
-        <div class="col-3">
+        <div class="col-md-2 ">
 
         </div>
     </div>

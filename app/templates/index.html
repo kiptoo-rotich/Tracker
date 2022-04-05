@@ -23,21 +23,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
-            <h1 class="text-center">Home</h1>
+
+        <div class="col-md-2">
         </div>
-        <div class="col-6">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-               Add tracker
-              </button>
-            <table class="table">
+        <div class="col-md-8">
+            {% if trackers %}
+            <table class="table text-center">
                 <thead>
                     <tr>
-                        <th scope="col">Tracker</th>
-                        <th scope="col">Logs</th>
-                        <th scope="col">Rate</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col" class="text-center">Tracker</th>
+                        <th scope="col" class="text-center">Logs</th>
+                        <th scope="col" class="text-center">Updated on</th>
+                        <th scope="col" class="text-center">Edit</th>
+                        <th scope="col" class="text-center">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,18 +43,24 @@
                     <tr>
                         <td>{{item.tracker_name}}</td>
                         <td>
-                            <a href="/logs/{{item.id}}"><img src="https://img.icons8.com/fluency/28/000000/file.png" /></a>
+                            <a href="/logs/{{item.id}}"><img src="https://img.icons8.com/fluency/23/000000/file.png" /></a>
                         </td>
-                        <td>{{item.rate}}</td>
+                        <td>{{item.updated.strftime('%Y-%m-%d at %H:%m')}}</td>
                         <td><img src="https://img.icons8.com/ultraviolet/20/000000/edit.png" /></td>
-                        <td><img src="https://img.icons8.com/color/28/000000/delete-forever.png" /></td>
+                        <td><img src="https://img.icons8.com/color/23/000000/delete-forever.png" /></td>
                     </tr>
                     {%endfor%}
 
                 </tbody>
             </table>
+            {% else %}
+            <h2 class="text-center">There are no trackers yet. Kindly add tracker with the button below.</h2>
+            {%endif%}
+            <button type="button" class="btn btn-info btn-md" style="width: 100%;" data-toggle="modal" data-target="#exampleModalCenter">
+                <b>Add tracker</b>
+                        </button>
         </div>
-        <div class="col-3">
+        <div class="col-md-2">
 
         </div>
     </div>
